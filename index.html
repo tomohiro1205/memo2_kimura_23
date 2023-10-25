@@ -18,19 +18,15 @@
         <li id="clear">Clear</li>
     </ul>
     <ul>
-        <li id="delete">delete</li>
-        <li id="reload">reload</li>
+        <li><input type="text" size="45" class="form" id="todo" placeholder="Input Key..."/></li>
+        <li id="delete">Delete</li>
+        <li id="reload">Reload</li>
     </ul>
-    <input type="text" class="form-control" id="todo" placeholder="input key..." />
-    
-
-  
+      
 </main>
 <table id="list">
 <!-- ここに追加データが挿入される -->
 </table>
-
-
 
 <script>
 
@@ -45,17 +41,11 @@ $("#key").val("");
 $("#memo").val("");
 });
 
-
-
-
-
 //2.clear クリックイベント
 $("#clear").on("click",function(){
     localStorage.clear();
-    $("#list").clear();
+    $("#list").empty();
 });
-
-
 
 //3.ページ読み込み：保存データ取得表示
 for(let i=0; i<localStorage.length; i++){

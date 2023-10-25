@@ -17,13 +17,21 @@
         <li id="save">Save</li>
         <li id="clear">Clear</li>
     </ul>
-<!-- セレクトボックス作成 -->
-<select  class="key2"></select>
-   
+    <ul>
+        <li id="delete">delete</li>
+        <li id="reload">reload</li>
+    </ul>
+    <input type="text" class="form-control" id="todo" placeholder="input key..." />
+    
+
+  
 </main>
 <table id="list">
 <!-- ここに追加データが挿入される -->
 </table>
+
+
+
 <script>
 
 //1.Save クリックイベント
@@ -33,6 +41,8 @@ const value = $("#memo").val();
 localStorage.setItem(key,value);
 const html = '<tr><th>'+key+'</th><td>'+value+'</td></tr>';
 $("#list").append(html);
+$("#key").val("");
+$("#memo").val("");
 });
 
 
@@ -42,9 +52,8 @@ $("#list").append(html);
 //2.clear クリックイベント
 $("#clear").on("click",function(){
     localStorage.clear();
-    $("#list").empty();
+    $("#list").clear();
 });
-
 
 
 
@@ -56,13 +65,34 @@ for(let i=0; i<localStorage.length; i++){
     $("#list").append(html);
 }
 
-// キーの呼び出しセレクトボックス
-let k = "";
-for(let i=1; i<localStorage.length+1; i++){
-    k += '<option value="+i+">'+i+'</option>';
-}
-$(".key2").html(k);
-TextDecoder
+// 4.deleteイベント
+$("#delete").on("click",function(){
+    const todo =$("#todo").val();
+    localStorage.removeItem(todo);
+    $("#list").empty();
+    for(let i=0; i<localStorage.length; i++){
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    const html = '<tr><th>'+key+'</th><td>'+value+'</td></tr>';
+    $("#list").append(html);
+ }    
+});    
+ 
+//5.リロードイベント
+$("#reload").on("click",function(){
+    const todo =$("#todo").val();
+    const value = localStorage.getItem(todo);
+    $("#key").val(todo);
+    $("#memo").val(value);
+        localStorage.removeItem(todo);
+        $("#list").empty();
+        for(let i=0; i<localStorage.length; i++){
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+        const html = '<tr><th>'+key+'</th><td>'+value+'</td></tr>';
+        $("#list").append(html);
+        }
+});    
 
 </script>
 <footer><small>G's</small></footer>

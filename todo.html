@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-todo.js"></script>
+</head>
+<body>
+    <header>
+        <h1>TODO rist</h1>
+        </header>
+    <div class="container m-3 p-4 shadow rounded">
+        
+        <div class="form-inline mb-3">
+          <input type="text" class="form-control w-50" id="todo" placeholder="input todo..." />
+          <button class="save" id="save">save</button>
+          <button class="delete" id="delete">delete all</button>
+        </div>
+        <ul class="list-group" id="list">
+        </ul>
+      </div>
+    <script>
+
+$("#save").on("click",function(){
+const key   = $("#key").val();
+const value = $("list").val();
+localStorage.setItem(key,value);
+const html = '<tr><td>'+value+'</td></tr>';
+$("#list").append(html);
+});
+    </script>  
+</body>
+</html>      
